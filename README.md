@@ -13,3 +13,5 @@ This is a very simple command line tool for controlling Wiz lights Via command l
  - ip - change the ip of your light
 
 putting lights.bat in C:\windows will allow for the command "Lights" to be called from cmd at all times
+
+Example:<code>Lights color 255 0 255</code>
