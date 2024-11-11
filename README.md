@@ -5,7 +5,7 @@ This is a very simple command line tool for controlling Wiz lights Via command l
 
 <b>Usage:</b>
 
-  Lights (off)/(on)<br>
-  Lights color (R) (G) (B)<br>
-  Lights id (ID number)<br>
-  Lights help<br>
+  - Lights (off)/(on)<br>
+  - Lights color (R) (G) (B)<br>
+  - Lights id (ID number)<br>
+  - Lights help<br>
