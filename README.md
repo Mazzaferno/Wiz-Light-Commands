@@ -1,6 +1,7 @@
 This is a very simple command line tool for controlling Wiz lights Via command line in Windows.
 
-<b>Requirements:</b> Npcap, the commands are sent to the lights via ncat commands. https://npcap.com/#download
+<b>Requirements:</b> Npcap <br>
+  - the commands are sent to the lights via ncat commands. https://npcap.com/#download
 
 <b>Usage:</b>
 
