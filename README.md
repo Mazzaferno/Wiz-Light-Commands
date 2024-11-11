@@ -15,3 +15,5 @@ This is a very simple command line tool for controlling Wiz lights Via command l
 putting lights.bat in C:\windows will allow for the command "Lights" to be called from cmd at all times
 
 Example:<code>Lights color 255 0 255</code>
+
+Speical thanks to <a href="https://www.reddit.com/r/wiz/comments/1582jfx/guide_to_controlling_a_wiz_lightplug_via_windows/">u/seanmacproductions</a> from reddit for making the <a href="https://seanmcnally.net/wiz-config.html">UDP code generator</a>.
