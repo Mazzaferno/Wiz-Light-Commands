@@ -1,4 +1,6 @@
 @echo off
+setlocal enabledelayedexpansion
+REM Check if temp.ini exists - this is where the lights ip is stored
 
 set "filePath=%appdata%\wizlight\temp.ini"
 
@@ -13,7 +15,18 @@ if exist "%filePath%" (
     echo %ip% > "%filePath%"
 )
 
-
+if "%1"=="ip" (
+    if "%2"=="" (
+        echo Invalid IP.
+        echo usage: lights ip 192.168.1.x
+        exit /b
+    ) else (
+        set "ip=%2"
+        echo Wiz light IP has been configured to !ip!
+        echo !ip! > "%filePath%"
+        exit /b
+    )
+)
 :: Check if an argument is passed
 if "%1"=="" (
     echo Please specify "on" or "off".
@@ -93,8 +106,9 @@ if /i "%1"=="help" (
     echo  - on - lights on
     echo  - off - lights off
     echo  - 1 - Daylight
-    echo  - color R G B - set the RGB colors of the light
     echo  - id - id followed by a number to set scene id 
+    echo  - color R G B - set the RGB colors of the light
+    echo  - ip - change the ip of your light
     REM Insert the command to turn off the lights here
     
     exit /b
@@ -149,4 +163,4 @@ exit /b
 :: Invalid argument
 :error
 echo Invalid option. Please use "lights help" for list of commands
-
+exit /b
