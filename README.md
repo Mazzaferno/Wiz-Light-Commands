@@ -10,3 +10,6 @@ This is a very simple command line tool for controlling Wiz lights Via command l
  - 1 - Daylight
  - id - id followed by a number to set scene id 
  - color R G B - set the RGB colors of the light
+
+
+putting lights.bat in C:\windows will allow for the command "Lights" to be called from cmd at all times
