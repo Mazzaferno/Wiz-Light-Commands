@@ -34,6 +34,13 @@ if "%1"=="" (
     exit /b
 )
 
+if "%~5"=="" (
+    set "white=0"
+) else (
+    set "white=%5"
+)
+
+
 :: Handle "on" argument
 if /i "%1"=="on" (
     echo Turning lights ON...
@@ -86,7 +93,7 @@ if /i "%1"=="color" (
     )
     echo Changing colors...
     :: Insert the command to turn off the lights here
-    echo {"id":1,"method":"setPilot","params":{"r":%2,"g":%3,"b":%4,"dimming": 100}} | ncat -u -w 1 %ip% 38899
+    echo {"id":1,"method":"setPilot","params":{"r":%2,"g":%3,"b":%4,"w":%white%,"dimming": 100}} | ncat -u -w 1 %ip% 38899
     exit /b
 )
 if /i "%1"=="id" (
@@ -107,7 +114,7 @@ if /i "%1"=="help" (
     echo  - off - lights off
     echo  - 1 - Daylight
     echo  - id - id followed by a number to set scene id 
-    echo  - color R G B - set the RGB colors of the light
+    echo  - color R G B W - set the RGB colors of the light, if White value is undefined it will default to zero
     echo  - ip - change the ip of your light
     REM Insert the command to turn off the lights here
     
