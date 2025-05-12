@@ -94,7 +94,7 @@ switch ($p) {
         $method = "setPilot"
         $parameters = @{ r = $r; g = $g; b = $b }
     }
-    "setip"{
+    "ip"{
         $ips = set-IPs
         $ips | Out-File -FilePath $iniPath -Encoding utf8
         Write-Host "IPs saved to $iniPath"
