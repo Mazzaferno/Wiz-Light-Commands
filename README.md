@@ -1,7 +1,8 @@
 This is a very simple command line tool for controlling Wiz lights in Windows.
 
-<b>Requirements:</b> Npcap <br>
+<b>Requirements:</b> Npcap or use powershell version<br>
   - the commands are sent to the lights via ncat commands. https://npcap.com/#download
+  - PowerShell can natively send UDP messages using the .NET libraries built into the language — specifically the System.Net.Sockets.UdpClient class, so ncat isn't needed.
 
 <b>Usage:</b>
 
