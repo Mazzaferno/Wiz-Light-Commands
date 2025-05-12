@@ -1,8 +1,10 @@
-param (
+<#param (
     [string]$p,
     [Parameter(ValueFromRemainingArguments = $true)]
     [string[]]$args
 )
+there was no need for these params, just use $args array..    #>
+
 $iniPath = Join-Path $env:APPDATA "wizlight\temp.ini"
 function set-IPs() {
     Write-Host "Please enter an ip or multiple seperated by commas like 1.1.1.1, 1.1.1.2"
@@ -21,19 +23,22 @@ if (-not (Test-Path $iniPath)){
 $port = 38899
 
 # Create the JSON message
-
-switch ($p) {
+$message = ""
+switch ($args) {
     "on" {
         $method = "setState"
         $parameters = @{ state = $true }
+        $message = "Lights turning on, thank you"
     }
     "off" {
         $method = "setState"
         $parameters = @{ state = $false }
+        $message = "Lights turning off, goodnight"
     }
     "1"{
         $method = "setPilot"
         $parameters = @{temp = 3966; dimming = 100}
+        $message = "Lights turning set to full brightness"
 
     }
     "2"{
@@ -42,7 +47,7 @@ switch ($p) {
 
     }
     "id"{
-        $id = $args[0]
+        $id = $args[1]
         if ($id.ToLower() -eq "help"){
             Write-Host "Usage: -p id <id>"
             Write-Host "---------------------------------------
@@ -129,6 +134,8 @@ foreach ($ip in $ips) {
 
 # Close the client
 $udp.Close()
-
-}
+foreach ($char in $message.ToCharArray()) {
+    Write-Host -NoNewline $char
+    Start-Sleep -Milliseconds 5
+}}
 Send-UDPMessage
