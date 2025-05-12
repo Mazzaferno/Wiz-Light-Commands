@@ -24,7 +24,7 @@ $port = 38899
 
 # Create the JSON message
 $message = ""
-switch ($args) {
+switch ($args[0]) {
     "on" {
         $method = "setState"
         $parameters = @{ state = $true }
@@ -48,8 +48,8 @@ switch ($args) {
     }
     "id"{
         $id = $args[1]
-        if ($id.ToLower() -eq "help"){
-            Write-Host "Usage: -p id <id>"
+        if ($id.GetType() -ne [int]){
+            Write-Host "Usage: lights id <id>"
             Write-Host "---------------------------------------
             Available IDs:`n
             4 Party
@@ -89,15 +89,16 @@ switch ($args) {
 
     }
     "color" {
-        if ($args.Count -ne 3) {
+        if ($args.Count -ne 4) {
             Write-Host "Usage: -p color 255 0 0"
             exit
         }
-        $r = [int]$args[0]
-        $g = [int]$args[1]
-        $b = [int]$args[2]
+        $r = $args[1]
+        $g = $args[2]
+        $b = $args[3]
         $method = "setPilot"
         $parameters = @{ r = $r; g = $g; b = $b }
+        $message = "Lights turning to color $r, $g, $b"
     }
     "ip"{
         $ips = set-IPs
@@ -106,7 +107,30 @@ switch ($args) {
         exit
     }
     default {
-        Write-Host "Invalid parameter. Use 'on' or 'off'."
+                        write-host "
+        ___  ___                              __ _
+        |  \/  |                             / _| |
+        | .  . | __ _ __________ _ ___  ___ | |_| |_
+        | |\/| |/ _  |_  /_  / _  / __|/ _ \|  _| __|
+        | |  | | (_| |/ / / / (_| \__ \ (_) | | | |_
+        \_|  |_/\__,_/___/___\__,_|___/\___/|_|  \__|
+                                                    
+                Lights control script
+                   open source 2025
+
+                by github.com/mazzaferno
+        " -ForegroundColor red
+        Write-Host "
+        on .................- turn on the lights
+        off                 - turn off the lights
+        1  .................- set to full brightness
+        2                   - set to 20% brightness
+        id <id> ............- set the lights to a preset scene - id help for available ids
+        color <r> <g> <b>   - set the lights to a color - r,g,b values between 0-255
+        ip .................- set the ip(s) of the lights
+        " -ForegroundColor Cyan
+
+
         exit
     }
 }
@@ -134,8 +158,12 @@ foreach ($ip in $ips) {
 
 # Close the client
 $udp.Close()
+
+$colors = @("Green", "Red", "Yellow", "Cyan", "Magenta", "White")
 foreach ($char in $message.ToCharArray()) {
-    Write-Host -NoNewline $char
-    Start-Sleep -Milliseconds 5
-}}
+    $random = Get-Random -Maximum $colors.Count
+    Write-Host -NoNewline $char -ForegroundColor Green
+    Start-Sleep -Milliseconds 50
+}
+}
 Send-UDPMessage
