@@ -14,6 +14,10 @@ This is a very simple command line tool for controlling Wiz lights in Windows.
  - ip - change the ip of your light
 
 putting lights.bat in C:\windows will allow for the command "Lights" to be called from cmd at all times
+for the same result with the powershell version, make a lights.bat in C:\windows with the following code: <br>
+<code>@echo off
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0lights.ps1" %*
+</code>
 
 <b>Example Command:</b><br>
 <code>Lights on</code><br>
